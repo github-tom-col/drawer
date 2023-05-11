@@ -1,0 +1,92 @@
+* { 
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
+  -o-box-sizing: border-box; 
+  box-sizing: border-box; 
+  /* adds animation for all transitions */ 
+  -webkit-transition: .25s ease-in-out; 
+  -moz-transition: .25s ease-in-out; 
+  -o-transition: .25s ease-in-out; 
+  transition: .25s ease-in-out; 
+  margin: 0; 
+  padding: 0; 
+  -webkit-text-size-adjust: none; 
+  --drawer-w: 40vw;
+  } 
+  
+  /* Makes sure that everything is 100% height */ 
+  
+  html,body { 
+  height: 100%; 
+  } 
+
+  #overlay {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  pointer-events: none;
+  }
+  
+  #drawer {
+    background: #c7c9c9; 
+    overflow: hidden;
+    position: fixed; 
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    width: var(--drawer-w); 
+
+    /* default */
+    left: calc(-1 * var(--drawer-w));
+    right: unset;
+  } 
+
+  #drawer.ltr {
+    left: calc(-1 * var(--drawer-w));
+    right: unset;
+    border-right: 2px solid black;
+  }
+  #drawer.ltr.open {
+    left: 0;
+  }
+  #overlay.ltr.open {
+    z-index: 1; /* set a lower z-index than the drawer to ensure it appears behind the drawer */
+    display: block; /* hide the overlay by default */
+    transition: opacity 0.3s ease-out;
+  }
+  
+  #drawer.rtl {
+    right: calc(-1 * var(--drawer-w));
+    left: unset;
+    border-left: 2px solid black;
+  }
+  #drawer.rtl.open {
+    right: 0;
+  }
+  #overlay.rtl.open {
+    z-index: 1; /* set a lower z-index than the drawer to ensure it appears behind the drawer */
+    display: block; /* hide the overlay by default */
+    transition: opacity 0.3s ease-in;
+  }
+  
+  /* actual page content pane */ 
+  
+  #page-content { 
+    width: 100vw; 
+    height: 100vh;
+    background-color: #FFFFFF;
+  }
+
+  /* extra */ 
+
+  #drawer.ltr.open + #page-content #toggleOpen {
+    margin-left: var(--drawer-w);
+  }
+
+  #drawer.rtl.open + #page-content #toggleOpen {
+    margin-right: var(--drawer-w);
+  }
